@@ -4,6 +4,7 @@ import { GameComponent } from './game/game.component';
 
 const routes: Routes = [
   { path: 'home', component: GameComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   //example
   // { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   // { path: 'dashboard', component: DashboardComponent },
