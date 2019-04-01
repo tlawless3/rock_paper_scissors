@@ -15,13 +15,12 @@ export class GameComponent implements OnInit {
   // private video
 
   ngOnInit() {
-
-    this.createCanvas()
+    this.createCapture()
   }
 
   private p5;
 
-  private createCanvas() {
+  private createCapture() {
     this.p5 = new p5(this.sketch);
   }
 
@@ -33,15 +32,12 @@ export class GameComponent implements OnInit {
 
 
     p.setup = () => {
-      p.createCanvas(480, 480);
-      console.log(p)
       capture = p.createCapture(p.VIDEO);
+      capture.parent('userVideo')
       capture.size(320, 240);
     };
 
     p.draw = () => {
-      p.image(capture, 0, 0, p.width, p.width * capture.height / capture.width);
-      p.filter(p.INVERT);
       // p.background(255);
       // p.fill(0);
       // p.rect(p.width / 2, p.height / 2, 50, 50);
