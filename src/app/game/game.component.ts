@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as p5 from 'p5';
+declare var p5: any;
 import * as ml5 from 'ml5'
 
 @Component({
@@ -12,11 +12,9 @@ export class GameComponent implements OnInit {
   constructor() {
   }
 
+  // private video
+
   ngOnInit() {
-    let video;
-    // Create a KNN classifier
-    const knnClassifier = ml5.KNNClassifier();
-    let featureExtractor;
 
     this.createCanvas()
   }
@@ -28,14 +26,25 @@ export class GameComponent implements OnInit {
   }
 
   private sketch(p: any) {
+    let capture;
+    // Create a KNN classifier
+    // const knnClassifier = ml5.KNNClassifier();
+    // let featureExtractor;
+
+
     p.setup = () => {
-      p.createCanvas(700, 600);
+      p.createCanvas(480, 480);
+      console.log(p)
+      capture = p.createCapture(p.VIDEO);
+      capture.size(320, 240);
     };
 
     p.draw = () => {
-      p.background(255);
-      p.fill(0);
-      p.rect(p.width / 2, p.height / 2, 50, 50);
+      p.image(capture, 0, 0, p.width, p.width * capture.height / capture.width);
+      p.filter(p.INVERT);
+      // p.background(255);
+      // p.fill(0);
+      // p.rect(p.width / 2, p.height / 2, 50, 50);
     };
   }
 
