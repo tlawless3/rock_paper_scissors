@@ -12,13 +12,23 @@ export class GameComponent implements OnInit {
   constructor() {
   }
 
-  // private video
+  private aiSelection;
+  private p5;
 
   ngOnInit() {
+    this.aiSelection = '';
     this.createCapture()
   }
 
-  private p5;
+  private aiMove() {
+    let rock = ['\u{1F91B}'];
+    let paper = ['\u{270B}'];
+    let scissors = ['\u{270C}'];
+
+    let selectionArr = [rock, paper, scissors]
+
+    this.aiSelection = selectionArr[Math.floor(Math.random() * 3)]
+  }
 
   private createCapture() {
     this.p5 = new p5(this.sketch);
