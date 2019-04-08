@@ -12,12 +12,14 @@ export class GameComponent implements OnInit {
   constructor() {
   }
 
-  private aiSelection;
+  private aiSelection
   private p5;
+  private knnClassifier
 
   ngOnInit() {
-    this.aiSelection = '';
+    this.aiSelection = ''
     this.createCapture()
+    this.knnClassifier = ml5.KNNClassifier()
   }
 
   private aiMove() {
@@ -30,28 +32,33 @@ export class GameComponent implements OnInit {
     this.aiSelection = selectionArr[Math.floor(Math.random() * 3)]
   }
 
+  private trainNeuralNet(move) {
+
+  }
+
   private createCapture() {
-    this.p5 = new p5(this.sketch);
+    this.p5 = new p5(this.sketch)
+    console.log(this.p5.VIDEO)
   }
 
   private sketch(p: any) {
-    let capture;
+    let capture
     // Create a KNN classifier
     // const knnClassifier = ml5.KNNClassifier();
     // let featureExtractor;
 
-
     p.setup = () => {
-      capture = p.createCapture(p.VIDEO);
+      capture = p.createCapture(p.VIDEO)
       capture.parent('userVideo')
-      capture.size(320, 240);
+      capture.size(320, 240)
     };
 
     p.draw = () => {
-      // p.background(255);
-      // p.fill(0);
-      // p.rect(p.width / 2, p.height / 2, 50, 50);
+      // p.background(255)
+      // p.fill(0)
+      // p.rect(p.width / 2, p.height / 2, 50, 50)
     };
+
   }
 
 }
