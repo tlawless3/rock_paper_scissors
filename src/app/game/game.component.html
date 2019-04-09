@@ -1,6 +1,11 @@
-<div id='userVideo' class='userVideoDiv'>
+<div>
+  <div id='userVideo' class='userVideoDiv'>
+  </div>
+
+  {{aiSelection}}
+
+  <button (click)='aiMove()'>click me</button>
+  <button (click)='trainNeuralNet("rock")'>This is Rock</button>
+  <button (click)='trainNeuralNet("paper")'>This is Paper</button>
+  <button (click)='trainNeuralNet("scissors")'>This is Scissors</button>
 </div>
-
-{{aiSelection}}
-
-<button (click)='aiMove()'>click me</button>

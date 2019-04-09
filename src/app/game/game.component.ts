@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-declare var p5: any;
-import * as ml5 from 'ml5'
+declare let p5: any;
+declare let ml5: any;
 
 @Component({
   selector: 'app-game',
@@ -15,6 +15,7 @@ export class GameComponent implements OnInit {
   private aiSelection
   private p5;
   private knnClassifier
+  private video
 
   ngOnInit() {
     this.aiSelection = ''
@@ -33,12 +34,20 @@ export class GameComponent implements OnInit {
   }
 
   private trainNeuralNet(move) {
-
+    console.log(move)
   }
 
   private createCapture() {
     this.p5 = new p5(this.sketch)
-    console.log(this.p5.VIDEO)
+    this.video = this.p5.createCapture({
+      audio: false,
+      video: {
+        facingMode: "user"
+      }
+    })
+    this.video.parent('userVideo')
+    this.video.size(320, 240)
+    // this.video.hide()
   }
 
   private sketch(p: any) {
@@ -48,17 +57,15 @@ export class GameComponent implements OnInit {
     // let featureExtractor;
 
     p.setup = () => {
-      capture = p.createCapture(p.VIDEO)
-      capture.parent('userVideo')
-      capture.size(320, 240)
+      //   capture = p.createCapture({
+      //     audio: false,
+      //     video: {
+      //       facingMode: "user"
+      //     }
+      //   })
+      //   capture.parent('userVideo')
+      //   capture.size(320, 240)
     };
-
-    p.draw = () => {
-      // p.background(255)
-      // p.fill(0)
-      // p.rect(p.width / 2, p.height / 2, 50, 50)
-    };
-
   }
 
 }
