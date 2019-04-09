@@ -4,6 +4,10 @@
 
   {{aiSelection}}
 
+  <div *ngIf='countdown'>
+    {{counter}}
+  </div>
+
   <button (click)='aiMove()'>click me</button>
   <button (click)='trainNeuralNet("rock")'>This is Rock</button>
   <button (click)='trainNeuralNet("paper")'>This is Paper</button>

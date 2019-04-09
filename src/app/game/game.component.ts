@@ -16,6 +16,8 @@ export class GameComponent implements OnInit {
   private p5;
   private knnClassifier
   private video
+  private counter: number
+  private countdown: boolean = false
 
   ngOnInit() {
     this.aiSelection = ''
@@ -34,11 +36,32 @@ export class GameComponent implements OnInit {
   }
 
   private trainNeuralNet(move) {
-    console.log(move)
+    if (this.countdown) {
+      return
+    }
+    this.counter = 4
+    let countedDown = false
+    let countdown = () => {
+      if (!countedDown) {
+        this.countdown = true
+      }
+      if (this.counter > 0 && this.countdown) {
+        this.counter--
+        setTimeout(() => {
+          countdown()
+        }, 1000)
+      }
+      //this if clause is what happens when the countdown is over
+      if (this.counter === 0 && !countedDown) {
+        this.countdown = false
+        countedDown = true
+      }
+    }
+    countdown()
   }
 
   private createCapture() {
-    this.p5 = new p5(this.sketch)
+    this.p5 = new p5()
     this.video = this.p5.createCapture({
       audio: false,
       video: {
@@ -48,24 +71,6 @@ export class GameComponent implements OnInit {
     this.video.parent('userVideo')
     this.video.size(320, 240)
     // this.video.hide()
-  }
-
-  private sketch(p: any) {
-    let capture
-    // Create a KNN classifier
-    // const knnClassifier = ml5.KNNClassifier();
-    // let featureExtractor;
-
-    p.setup = () => {
-      //   capture = p.createCapture({
-      //     audio: false,
-      //     video: {
-      //       facingMode: "user"
-      //     }
-      //   })
-      //   capture.parent('userVideo')
-      //   capture.size(320, 240)
-    };
   }
 
 }
